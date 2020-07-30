@@ -47,3 +47,7 @@ task("integration-test", inputs=[git, controller],
        )
      ]
 )
+
+kind_cleanup = cleanup(kind_cluster, "integration-test", git)
+
+action(tasks=["integration-test", kind_cleanup], on=pullRequest())
