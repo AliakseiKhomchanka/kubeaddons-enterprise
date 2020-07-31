@@ -1,4 +1,4 @@
-#!mesosphere/dispatch-starlark:v0.5-beta2
+#!mesosphere/dispatch-starlark:v0.6
 # vi:syntax=python
 
 load("github.com/mesosphere/dispatch-catalog/starlark/stable/pipeline@0.0.4", "gitResource", "pullRequest", "push", "volume", "resourceVar", "secretVar")
