@@ -1,4 +1,3 @@
-  
 #!mesosphere/dispatch-starlark:v0.5-beta2
 # vi:syntax=python
 
