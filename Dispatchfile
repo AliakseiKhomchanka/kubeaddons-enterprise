@@ -11,7 +11,7 @@ gitResource(git, url="$(context.git.url)", revision="$(context.git.commit)")
 cluster_name = "kubeaddons"
 kind_cluster=make_kind_cluster(cluster_name, git)
 
-task("integration-test", inputs=[git, controller],
+task("integration-test", inputs=[git],
      deps=[kind_cluster],
      steps=[
        fetch_kubeconfig(cluster_name, git),
