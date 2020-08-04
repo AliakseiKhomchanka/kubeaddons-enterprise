@@ -45,8 +45,8 @@ task("integration-test", inputs=[git],
                                                          "GITHUB_TOKEN"))
                   ]
             )
-       )
      ]
+)
 )
 
 kind_cleanup = cleanup(kind_cluster, "integration-test", git)
