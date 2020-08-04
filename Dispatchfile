@@ -38,7 +38,8 @@ task("integration-test", inputs=[git],
               requests = {
                 "cpu": k8s.resource_quantity("1000m"),
                 "memory": k8s.resource_quantity("1Gi")
-              },
+              }
+              ),
               env=[k8s.corev1.EnvVar(name="GITHUB_TOKEN",
                                      valueFrom=secretVar("d2iq-dispatch-github-personal-access-token",
                                                          "GITHUB_TOKEN"))
