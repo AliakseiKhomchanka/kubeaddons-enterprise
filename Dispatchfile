@@ -19,7 +19,7 @@ dindTask("integration-test", inputs=[git],
        k8s.corev1.Container(
        name = "integration-tester",
               workingDir = "/workspace/{}/".format(git),
-              image = "mesosphere/kubeaddons-ci:latest",
+              image = "mesosphere/kubeaddons-ci:dispatch@sha256:80a6f3c8775133b4ad2fab3d44ab4fbb4b541dbc03fcdb296b13f67611427d8c",
               command = ["/bin/bash", "-c"],
               args = [
                   """
