@@ -40,10 +40,13 @@ dindTask("integration-test", inputs=[git],
                 "memory": k8s.resource_quantity("1Gi")
               }
               ),
+              volumes = [volume("docker", emptyDir=k8s.corev1.EmptyDirVolumeSource())],
+              volumeMounts = [k8s.corev1.VolumeMount(name="docker", mountPath="/var/lib/docker")],
               env=[k8s.corev1.EnvVar(name="GITHUB_TOKEN",
                                      valueFrom=secretVar("d2iq-dispatch-github-personal-access-token",
                                                          "GITHUB_TOKEN"))
-                  ]
+                  ],
+              securityContext = k8s.corev1.SecurityContext(privileged=True)
             )
      ]
 )
