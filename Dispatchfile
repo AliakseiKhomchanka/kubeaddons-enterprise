@@ -3,6 +3,7 @@
 
 load("github.com/mesosphere/dispatch-catalog/starlark/stable/pipeline@0.0.4", "gitResource", "pullRequest", "push", "volume", "resourceVar", "secretVar")
 load("github.com/mesosphere/cluster-claim-controller/starlark/claim@master", "make_kind_cluster", "fetch_kubeconfig", "cleanup")
+load("github.com/mesosphere/dispatch-catalog/starlark/stable/docker@0.0.4", "dindTask")
 
 
 git = "src-git"
@@ -11,7 +12,7 @@ gitResource(git, url="$(context.git.url)", revision="$(context.git.commit)")
 cluster_name = "kubeaddons"
 kind_cluster=make_kind_cluster(cluster_name, git)
 
-task("integration-test", inputs=[git],
+dindTask("integration-test", inputs=[git],
      deps=[kind_cluster],
      steps=[
        fetch_kubeconfig(cluster_name, git),
@@ -40,13 +41,10 @@ task("integration-test", inputs=[git],
                 "memory": k8s.resource_quantity("1Gi")
               }
               ),
-              volumes = [volume("docker", emptyDir=k8s.corev1.EmptyDirVolumeSource())],
-              volumeMounts = [k8s.corev1.VolumeMount(name="docker", mountPath="/var/lib/docker")],
               env=[k8s.corev1.EnvVar(name="GITHUB_TOKEN",
                                      valueFrom=secretVar("d2iq-dispatch-github-personal-access-token",
                                                          "GITHUB_TOKEN"))
-                  ],
-              securityContext = k8s.corev1.SecurityContext(privileged=True)
+                  ]
             )
      ]
 )
