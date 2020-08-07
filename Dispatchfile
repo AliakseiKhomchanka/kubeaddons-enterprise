@@ -1,7 +1,7 @@
 #!mesosphere/dispatch-starlark:v0.6
 # vi:syntax=python
 
-load("github.com/mesosphere/dispatch-catalog/starlark/stable/pipeline@0.0.4", "gitResource", "pullRequest", "push", "volume", "resourceVar", "secretVar")
+load("github.com/mesosphere/dispatch-catalog/starlark/stable/pipeline@0.0.4", "gitResource", "pullRequest", "push", "volume", "resourceVar", "secretVar", "dindTask")
 load("github.com/mesosphere/cluster-claim-controller/starlark/claim@master", "make_kind_cluster", "fetch_kubeconfig", "cleanup")
 
 
